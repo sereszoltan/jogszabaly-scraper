@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html lang="hu">
+<head>
+  <meta charset="UTF-8">
+  <title>Jogszabály JSON szerkesztő</title>
+  <style>
+    body {
+      font-family: sans-serif;
+      padding: 2rem;
+    }
+
+    textarea {
+      width: 100%;
+      height: 500px;
+      font-family: monospace;
+      font-size: 14px;
+    }
+
+    button {
+      padding: 0.5rem 1rem;
+      margin-top: 1rem;
+    }
+
+    #status {
+      margin-top: 1rem;
+      color: green;
+    }
+  </style>
+</head>
+
+<body>
+  <h1>Jogszabály JSON szerkesztő</h1>
+  
+  <textarea id="jsonArea"></textarea><br>
+  <button onclick="saveJson()">💾 Mentés</button>
+  <div id="status"></div>
+
+  <script>
+    async function loadJson() {
+      const res = await fetch('/laws');
+      const data = await res.json();
+      document.getElementById('jsonArea').value = JSON.stringify(data, null, 2);
+    }
+
+    async function saveJson() {
+      const status = document.getElementById('status');
+      try {
+        const raw = document.getElementById('jsonArea').value.trim();
+        const parsed = JSON.parse(raw);
+         
+        if (!parsed || !Array.isArray(parsed.laws) || parsed.laws.length === 0) {
+          throw new Error("Hibás vagy üres JSON (hiányzik a laws tömb)");
+        }
+
+        const res = await fetch('/laws', {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify(parsed)
+        });
+parsed
+        console.log(JSON.stringify(parsed));
+
+        const result = await res.json();
+        status.textContent = result.message || '✅ Mentve!';
+        status.style.color = 'green';
+      } catch (err) {
+        status.textContent = '❌ Hiba: ' + err.message;
+        status.style.color = 'red';
+      }
+    }
+
+    loadJson();
+  </script>
+</body>
+</html>

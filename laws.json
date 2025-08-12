@@ -1,0 +1,28 @@
+{
+  "laws": [
+    {
+      "id": 1,
+      "title": "2025. évi II. törvény",
+      "link": "https://njt.hu/jogszabaly/2025-2-00-00",
+      "hatalyos": "2025-03-04",
+      "ertesitendok": [
+        {
+          "name": "Seres Zoltán",
+          "email": "sereszoltan95@gmail.com"
+        }
+      ]
+    },
+    {
+      "id": 2,
+      "title": "2024. évi XCI. törvény",
+      "link": "https://njt.hu/jogszabaly/2024-91-00-00",
+      "hatalyos": "2025-06-20",
+      "ertesitendok": [
+        {
+          "name": "Seres Zoltán",
+          "email": "sereszoltan95@gmail.com"
+        }
+      ]
+    }
+  ]
+}
