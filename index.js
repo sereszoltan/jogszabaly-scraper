@@ -50,6 +50,7 @@ app.listen(PORT, () => {
   console.log(`✅ Server is running on http://localhost:${PORT}`);
 });
 
+*/
 
 function extractHatalyosDate(html) {
   const $ = cheerio.load(html);
@@ -61,7 +62,7 @@ function extractHatalyosDate(html) {
   }
   return null;
 }
-*/
+
 
 async function checkLawUpdates() {
   const laws = JSON.parse(fs.readFileSync('laws.json', 'utf-8')).laws;
